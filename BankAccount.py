@@ -29,9 +29,25 @@ class BankAccount:
         self.balance += interest
         return self.balance
 
-ben = BankAccount("Ben chan", 39287362, 928162736, 0)
+    def print_receipt(self):
+        account_number_string = str(self.account_number)
+        censored_string = ''
+        counter = 0
+        for number in range(len(account_number_string)):
+            if counter < 4:
+                censored_string += "*"
+                counter += 1
+            else:
+                censored_string += account_number_string[counter]
+                counter += 1
+
+        print(f"{self.full_name}\nAccount No.: {censored_string}\nRouting No.: {self.routing_number}\nBalance: ${self.balance}")
+
+ben = BankAccount("Ben Chan", 39287362, 928162736, 0)
+# david = BankAccount("David Chan", )
 
 ben.deposit(45.01)
 ben.withdraw(95.00)
 ben.add_interest()
 ben.get_balance()
+ben.print_receipt()
