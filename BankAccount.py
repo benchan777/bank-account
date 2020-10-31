@@ -43,6 +43,10 @@ class BankAccount:
 
         print(f"{self.full_name}\nAccount No.: {censored_string}\nRouting No.: {self.routing_number}\nBalance: ${self.balance}")
 
+    def withdrawal_fee(self):
+        self.balance -= 2
+        print("A $2 ATM fee has been added.")
+
 ben = BankAccount("Ben Chan", 39287362, 928162736, 0)
 david = BankAccount("David Chan", 66751479, 899878318, 0)
 steven = BankAccount("Steven George", 49516794, 974897183, 0)
@@ -52,14 +56,24 @@ steven = BankAccount("Steven George", 49516794, 974897183, 0)
 # ben.add_interest()
 # ben.get_balance()
 # ben.print_receipt()
-user_input = int(input("Select an option:\n1: Deposit\n2: Withdraw\n3: Add Interest\n4: Get Balance\n5: Print receipt\nEnter your option here: "))
+# user_input = int(input("Select an option:\n1: Deposit\n2: Withdraw\n3: Add Interest\n4: Get Balance\n5: Print receipt\nEnter your option here: "))
 
-if user_input == 1:
-    deposit_input = int(input("Enter how much money you would like to deposit: "))
-    ben.deposit(deposit_input)
-elif user_input == 2:
-    withdraw_input = int(input("Enter how much money you would like to withdraw: "))
-    ben.withdraw(withdraw_input)
-elif user_input == 3:
-    ben.add_interest()
-    print("Interest has been added!")
+while True:
+    user_input = int(input("Select an option. Enter 'quit' to exit.\n1: Deposit\n2: Withdraw\n3: Add Interest\n4: Get Balance\n5: Print receipt\nEnter your option here: "))
+
+    if user_input == 1:
+        deposit_input = int(input("Enter how much money you would like to deposit: "))
+        ben.deposit(deposit_input)
+    elif user_input == 2:
+        withdraw_input = int(input("Enter how much money you would like to withdraw: "))
+        ben.withdrawal_fee()
+        ben.withdraw(withdraw_input)
+    elif user_input == 3:
+        ben.add_interest()
+        print("Interest has been added!")
+    elif user_input == 4:
+        ben.get_balance()
+    elif user_input == 5:
+        ben.print_receipt()
+    else:
+        break
